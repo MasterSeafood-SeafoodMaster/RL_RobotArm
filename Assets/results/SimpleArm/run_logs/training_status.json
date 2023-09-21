@@ -2,22 +2,22 @@
     "ArmAgent": {
         "checkpoints": [
             {
-                "steps": 1250,
-                "file_path": "results\\SimpleArm\\ArmAgent\\ArmAgent-1250.onnx",
-                "reward": -10.673728942871094,
-                "creation_time": 1694869586.9085636,
+                "steps": 58336,
+                "file_path": "results\\SimpleArm\\ArmAgent\\ArmAgent-58336.onnx",
+                "reward": 0.0,
+                "creation_time": 1695229624.0188951,
                 "auxillary_file_paths": [
-                    "results\\SimpleArm\\ArmAgent\\ArmAgent-1250.pt"
+                    "results\\SimpleArm\\ArmAgent\\ArmAgent-58336.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 1250,
+            "steps": 58336,
             "file_path": "results\\SimpleArm\\ArmAgent.onnx",
-            "reward": -10.673728942871094,
-            "creation_time": 1694869586.9085636,
+            "reward": 0.0,
+            "creation_time": 1695229624.0188951,
             "auxillary_file_paths": [
-                "results\\SimpleArm\\ArmAgent\\ArmAgent-1250.pt"
+                "results\\SimpleArm\\ArmAgent\\ArmAgent-58336.pt"
             ]
         }
     },

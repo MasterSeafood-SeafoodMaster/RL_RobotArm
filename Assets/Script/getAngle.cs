@@ -9,12 +9,12 @@ public class getAngle : MonoBehaviour
     public TextMeshProUGUI[] tmpT = new TextMeshProUGUI[4];
     void Update()
     {
-        Vector3 angle = new Vector3(t[0].localEulerAngles.x, t[0].localEulerAngles.y, t[0].localEulerAngles.z-180);
-        tmpT[0].text = (angle).ToString();
+        Vector3 angle = new Vector3(t[0].localEulerAngles.x, t[0].localEulerAngles.y, t[0].localEulerAngles.z);
+        tmpT[0].text = (ClampSingleAngle(angle.z)).ToString();
         for (int i=1; i<4; i++)
         {
-            
-            tmpT[i].text = ClampVector3(t[i].localEulerAngles).ToString();
+            tmpT[i].text = ClampSingleAngle(t[i].localEulerAngles.y).ToString();
+            //tmpT[i].text = ClampVector3(t[i].localEulerAngles).ToString();
         }
     }
     float ClampSingleAngle(float angle)
@@ -28,14 +28,7 @@ public class getAngle : MonoBehaviour
             angle += 360f;
         }
 
-        return Mathf.Clamp(angle, -90f, 90f);
+        return (int)Mathf.Clamp(angle, -90f, 90f);
     }
-    Vector3 ClampVector3(Vector3 eulerRotation)
-    {
-        float clampedX = ClampSingleAngle(eulerRotation.x);
-        float clampedY = ClampSingleAngle(eulerRotation.y);
-        float clampedZ = ClampSingleAngle(eulerRotation.z);
 
-        return new Vector3(clampedX, clampedY, clampedZ);
-    }
 }

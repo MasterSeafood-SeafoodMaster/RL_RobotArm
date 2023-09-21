@@ -29,11 +29,11 @@ public class SimpleArm : Agent
     }
     public override void CollectObservations(VectorSensor sensor) //value[3*2+3] = 9
     {
-        sensor.AddObservation( (nodes[0].localEulerAngles.z-180)/180 );
+        sensor.AddObservation(ClampSingleAngle(nodes[0].localEulerAngles.z) / 90);
         sensor.AddObservation( ClampSingleAngle(nodes[1].localEulerAngles.x) / 90 );
         sensor.AddObservation( ClampSingleAngle(nodes[2].localEulerAngles.x) / 90 );
         sensor.AddObservation( ClampSingleAngle(nodes[3].localEulerAngles.x) / 90 );
-        sensor.AddObservation( Target.localPosition/8 );
+        sensor.AddObservation( Target.localPosition/7 );
     }
     public override void OnActionReceived(ActionBuffers actions)
     {
@@ -45,11 +45,13 @@ public class SimpleArm : Agent
 
 
         rNode[0].angularVelocity = Vector3.zero;
-        nodes[0].Rotate(controlSignals[0] * Speed);
+        Vector3 newangle = nodes[0].localEulerAngles + (controlSignals[0] * Speed);
+        newangle = new Vector3(newangle.x, newangle.y, ClampSingleAngle(newangle.z));
+        nodes[0].localEulerAngles = newangle;
         for (int i=1; i<4; i++)
         {
             rNode[i].angularVelocity = Vector3.zero;
-            Vector3 newangle= nodes[i].localEulerAngles + (controlSignals[i] * Speed);
+            newangle= nodes[i].localEulerAngles + (controlSignals[i] * Speed);
             newangle = new Vector3(newangle.x, ClampSingleAngle(newangle.y), newangle.z);
             nodes[i].localEulerAngles = newangle;
         }
@@ -88,7 +90,7 @@ public class SimpleArm : Agent
     Vector3 GenerateRandomVector()
     {
         float minDistance = 4f;
-        float maxDistance = 8f;
+        float maxDistance = 10f;
         float randomAngle = Random.Range(0f, 2f * Mathf.PI);
         float randomDistance = Random.Range(minDistance, maxDistance);
 
